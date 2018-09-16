@@ -6,6 +6,7 @@ const ValidateRegisterInput = (data) => {
 
 
     data.name = !isEmpty(data.name) ? data.name : "";
+    data.lastname = !isEmpty(data.lastname) ? data.lastname : "";
     data.email = !isEmpty(data.email) ? data.email : "";
     data.password = !isEmpty(data.password) ? data.password : "";
     data.password2 = !isEmpty(data.password2) ? data.password2 : "";
@@ -15,6 +16,12 @@ const ValidateRegisterInput = (data) => {
     }
     if(Validator.isEmpty(data.name)) {
         errors.name = "Name field is required";
+    }
+    if(!Validator.isLength(data.lastname, {min:2, max:30})){
+        errors.lastname = "Name must be between 2 and 30 characters";
+    }
+    if(Validator.isEmpty(data.lastname)) {
+        errors.lastname = "Name field is required";
     }
     if(Validator.isEmpty(data.email)) {
         errors.email = "Email is required";
