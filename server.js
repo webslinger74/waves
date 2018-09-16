@@ -4,9 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 // const webpack = require('webpack');
 const mongoose = require('mongoose');
-const users = require('./routes/api/users');
-const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+const users = require('./routes/users');
 const passport = require('passport');
 
 
@@ -14,7 +12,7 @@ const db = require('./config/keys.js').mongoURI;
 
 //connect to MongoDB
 
-mongoose.connect(db, { server: { auto_reconnect: true } }, { useNewUrlParser: true })
+mongoose.connect(db, {server: { auto_reconnect: true } } /*{ useNewUrlParser: true }*/)
     .then(()=> console.log('db connected'))
     .catch((error) => console.log(error));
 
