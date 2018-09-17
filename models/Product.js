@@ -33,7 +33,7 @@ const ProductSchema = new Schema({
     },
     wood:{
         type:Schema.Types.ObjectId,
-        ref: 'wood',
+        ref: 'woods',
         required:true
     },
     frets:{
@@ -46,8 +46,8 @@ const ProductSchema = new Schema({
         default:0
     },
     publish:{
-        required:true,
-        type:Boolean
+        required: true,
+        type: Boolean
     },
     images:{
         type:Array,

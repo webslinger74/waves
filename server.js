@@ -38,7 +38,7 @@ require('./config/passport')(passport);
 app.use('/api/users', users);
 app.use('/api/productsBrands', brands);
 app.use('/api/productsWoods', woods);
-app.use('api/productsGuitars', products)
+app.use('/api/productsGuitars', products)
 
 app.listen(port, (error)=> {
     if(error){
