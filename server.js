@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
 const brands = require('./routes/brands');
+const woods = require('./routes/woods');
 const passport = require('passport');
 
 
@@ -35,6 +36,7 @@ require('./config/passport')(passport);
 
 app.use('/api/users', users);
 app.use('/api/products', brands);
+app.use('/api/products', woods);
 
 app.listen(port, (error)=> {
     if(error){
