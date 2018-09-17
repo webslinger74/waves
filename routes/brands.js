@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const admin = require('../config/admin');
 
-router.post('/brands', passport.authenticate('jwt', {session:false}, admin, (req, res) => {
+router.post('/brands', passport.authenticate('jwt', {session:false}), admin, (req, res) => {
             const brand = new Brand({
                 name:req.body.name
             });
@@ -19,7 +19,17 @@ router.post('/brands', passport.authenticate('jwt', {session:false}, admin, (req
                 })
 
 
-}))
+})
+
+router.get('/brands', (req,res) => {
+    Brand.find({}).
+        then(brands => {
+            res.status(200).send(brands);
+        })
+        .catch((err) => {
+            res.status(400).json(err);
+        })
+})
 
 
 

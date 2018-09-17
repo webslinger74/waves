@@ -29,11 +29,11 @@ router.post('/register', (req, res) => {
                     name:req.body.name,
                     lastname:req.body.lastname,
                     email:req.body.email,
-                    password:req.body.password
-                    
+                    password:req.body.password,
+                    role:req.body.role ? req.body.role : 0
                 });
 
-                bcrypt.genSalt(10, (error, salt) => {
+                  bcrypt.genSalt(10, (error, salt) => {
                     if(error) throw error;
                     bcrypt.hash(newUser.password, salt, (error, hash) => {
                         if(error) throw error;

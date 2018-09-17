@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const admin = require('../config/admin');
 
-router.post('/woods', passport.authenticate('jwt', {session:false}, admin, (req, res) => {
+router.post('/woods', passport.authenticate('jwt', {session:false}), admin, (req, res) => {
             const wood = new Wood({
                 name:req.body.name
             });
@@ -19,7 +19,7 @@ router.post('/woods', passport.authenticate('jwt', {session:false}, admin, (req,
                 })
 
 
-}))
+})
 
 
 router.get('/woods',  (req, res) => {
