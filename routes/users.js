@@ -93,7 +93,7 @@ router.post('/login', (req, res) => {
              
                     } else {
                         errors.password = "Password incorrect";
-                        return res.status(400).json();
+                        return res.status(400).json({msg:"password incorrect"});
                     }
                 })
         })
@@ -105,8 +105,12 @@ router.post('/login', (req, res) => {
 router.get('/current', passport.authenticate('jwt', {session:false}), (req, res) => {
     res.json({   id:req.user.id,
                  name:req.user.name,
+                 lastname:req.user.lastname,
                  email:req.user.email,
-                 avatar:req.user.avatar
+                 isAdmin:req.user.role === 0 ? false : true,
+                 isAuth: true,
+                 cart: req.user.cart,
+                 history: req.user.history
 
     });
 });

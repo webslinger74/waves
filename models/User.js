@@ -22,6 +22,21 @@ const UserSchema = new Schema({
     date: {
         type:Date,
         default:Date.now
+    },
+    cart:{
+        type: Array,
+        default:[]
+    },
+    history: {
+        type: Array,
+        default: []
+    },
+    role: {
+        type: Number,
+        default:0    // 0 is for user 1 is for admin-person
+    },
+    token: {
+        type:String
     }
 });
 const User = mongoose.model('users', UserSchema);
