@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Home from './components/Home';
 import Layout from './components/Layout';
-
+import RegisterLogin from './components/RegisterLogin/RegisterLogin';
 
 const Routes = ()=> {
     
@@ -10,6 +10,7 @@ const Routes = ()=> {
             
             <Layout>
             <Switch>
+                <Route path="/register_login" exact component={RegisterLogin} />
                 <Route path="/"  exact component={Home}/>
             </Switch>
             </Layout>
