@@ -14,15 +14,19 @@ module.exports = merge(common, {
         port:8080,
         historyApiFallback:true,   //this ensures the site goes back to root to load react router from home page
         proxy: {
-            "/api/users/register" :{
+            "/api/users/**" :{
                 target:"http://localhost:5000", 
                 secure:"false" 
              },
-            "/api/**/**" :{
+            "/api/productsBrands/**" :{
                 target:"http://localhost:5000",
                 secure:"false"
             },
-            "/api/profile/handle/**" : {
+            "/api/productsWoods/**" : {
+                target:"http://localhost:5000",
+                secure:"false"
+            },
+            "/api/productsGuitars/**" : {
                 target:"http://localhost:5000",
                 secure:"false"
             }

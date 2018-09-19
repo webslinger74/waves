@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 var htmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = {
     entry: ["babel-polyfill", path.join(__dirname, './src/index.js')],
     output:{
@@ -43,8 +42,24 @@ module.exports = {
                         }
                       }
                     ]
-                  }       
-    ]
-}     
+                  },
+                  {
+                  test: /\.(woff(2)?|ttf|eot|svg)(\?v=d+\.\d+)?$/,
+                  use: [
+                    {
+                      loader:'file-loader',
+                      options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                        
+                      }
+                    }
+                  ]
+                }
+                ]
+              }
+                
+            
+  
     
 }
