@@ -5,7 +5,8 @@ import Layout from './components/Layout';
 import RegisterLogin from './components/RegisterLogin/RegisterLogin';
 import Register from './components/RegisterLogin/Register';
 import Login from './components/RegisterLogin/Login';
-
+import UserLayout from './components/User/UserLayout';
+import PrivateRoute from './utils/PrivateRoute';
 
 const Routes = ()=> {
     
@@ -13,6 +14,9 @@ const Routes = ()=> {
             
             <Layout>
             <Switch>
+
+                
+                <PrivateRoute path="/user/dashboard" exact component={UserLayout} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={Register} />
                 <Route path="/register_login" exact component={RegisterLogin} />

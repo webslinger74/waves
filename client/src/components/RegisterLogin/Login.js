@@ -22,7 +22,7 @@ constructor(){
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
+      this.props.history.push('/user/dashboard');
     }
 
     if(nextProps.errors){
