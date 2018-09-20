@@ -25,7 +25,7 @@ const Footer = () => {
                                 />
                                 <div className="nfo">
                                     <div>Address</div>
-                                    <div>Kramer 2345</div>
+                                    <div>Cheadle SK4</div>
                                 </div>
                             </div>
                             <div className="tag">
