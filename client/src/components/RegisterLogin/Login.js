@@ -53,11 +53,12 @@ constructor(){
         const {errors} = this.state;
 
         return (
-          
-                  
+          <div className="page_wrapper">
+          <div className="container">
                   <div className="signin_wrapper">
 
                 <form onSubmit={this.onSubmit}>
+                <h1>LOGIN WITH YOUR DETAILS</h1>
                 <TextFieldGroup 
                     type="email"
                     placeholder="Email Address"
@@ -84,7 +85,8 @@ constructor(){
                   <input type="submit" className="btn btn-info btn-block mt-4" />
                 </form>
             </div>
-
+</div>
+</div>
           )
     }
 }

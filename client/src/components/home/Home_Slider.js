@@ -1,19 +1,21 @@
 import React from 'react';
 import Slider from 'react-slick';
 import MyButton from '../Inputs/Button';
+import file1 from '../../images/featured/featured_home.jpg';
+import file2 from '../../images/featured/featured_home_2.jpg';
 
 const HomeSlider = (props) => {
    
     const slides = [
         {
-            img: './images/featured/featured_home.jpg',
+            img: file1,
             lineOne:'Fender',
             lineTwo:'Custom Shop',
             linkTitle:'Show Now',
             linkTo:'/shop'
         },
         {
-            img: './images/featured/featured_home_2.jpg',
+            img: file2,
             lineOne:'B-Stock',
             lineTwo:'Awesome Discounts',
             linkTitle:'View Offers',
@@ -26,11 +28,11 @@ const HomeSlider = (props) => {
         infinite: true,
         speed: 500,
         slidesToShow:1,
-        arrow: false
+        arrows: false
     }
    
-  const generateSlides = (sliders) => (
-       sliders ? sliders.map((item, i) => (
+  const generateSlides = () => (
+       slides ? slides.map((item, i) => (
        <div key={i}>
             <div className="featured_image"
                 style={{
@@ -39,7 +41,15 @@ const HomeSlider = (props) => {
                 }}>
 
                 <div className="featured_action">
-                
+                        <div className="tag title">{item.lineOne}</div>
+                        <div className="tag low_title">{item.lineTwo}</div>
+               <div>
+                   <MyButton
+                    type="default"
+                    title={item.linkTitle}
+                    linkTo={item.linkTo}
+                    />
+               </div>
                 </div>
 
 
@@ -56,7 +66,7 @@ const HomeSlider = (props) => {
         <div className="featured_container">
 
         <Slider {...settings} >
-            {generateSlides(slides)}
+            {generateSlides()}
         </Slider>
 
         </div>
