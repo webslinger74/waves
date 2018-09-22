@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import UserLayout from './UserLayout';
 import MyButton from '../Inputs/Button';
 
 
 
-const UserDashboard = () => {
+const UserDashboard = ({auth}) => {
     return (
         <div>
     
         <div className="user_nfo_panel">
           <h1>USER INFORMATION</h1>  
           <div>
-        <span>name</span>
-        <span>lastname</span>
-        <span>email</span>
+        <span>{auth.user.name}</span>
+        <span>{auth.user.lastname}</span>
+        <span>{auth.user.email}</span>
         </div>
         <MyButton 
             type="default"

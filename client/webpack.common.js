@@ -38,7 +38,8 @@ module.exports = {
                       {
                         loader:'url-loader',
                         options: {
-                          
+                          name: '[name].[ext]',
+                          outputPath: 'images/'
                         }
                       }
                     ]

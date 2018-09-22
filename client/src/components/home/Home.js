@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import HomeSlider from './Home_Slider';
 
 class Home extends Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class Home extends Component {
     render() { 
         return ( 
             <div>
-                Home Page
+                <HomeSlider />
             </div>
          );
     }

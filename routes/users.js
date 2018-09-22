@@ -79,7 +79,8 @@ router.post('/login', (req, res) => {
                         const payload = {
                             id: user.id,
                             name:user.name,
-                            lastname:user.lastname
+                            lastname:user.lastname,
+                            email:user.email
                         } //creates jwt payload
                         jwt.sign(payload, keys, { expiresIn: 7200 }, (error, token) => {
                             if (error) {console.log(error)} 
