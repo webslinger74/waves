@@ -14,7 +14,7 @@ class Card extends Component {
         if(images && images.length > 0){
                 return image[0].url
         } else {
-            return noImage.url;
+            return noImage;
         }  
     }
 
@@ -25,20 +25,21 @@ class Card extends Component {
         return (
                
 
-            <div className="card_item_wrapper"> 
+            <div> 
                 <div className="image"
                                 style={{
                                     background:`url(${this.renderCardImage(card.images)}) no-repeat`
-                                }}>
-                
-                <div>{card.frets}</div>
-                <div>{card.name}</div>
+                                }}> </div>
+
+                                <div className="action_container">
+                    <div className="tags">
+                <div className="brand">{card.brand.name}</div>
+                <div className="name">{card.name}</div>
                 <div className="price">{card.price}</div>
                         </div>            
                                         
-               
+               </div>
             </div>
-
 
 
           );

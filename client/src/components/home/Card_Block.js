@@ -9,9 +9,8 @@ const  CardBlock = ({ item , title}) => {
         item.map((card,i) => (
 
                 <div className="card_item_wrapper" key={i}>
-                    <h1>title of the guitar</h1>
 
-                        <Card card={card} />
+                        <Card card={card} key={i} />
                   
                 </div>
             )) : null
@@ -30,7 +29,7 @@ const  CardBlock = ({ item , title}) => {
                         }
                          <div style={{
                         display:'flex',
-                         flexWrap:'Wrap'
+                         flex:'wrap'
                        }}>
 
            

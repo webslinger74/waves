@@ -25,7 +25,7 @@ router.post('/woods', passport.authenticate('jwt', {session:false}), admin, (req
 router.get('/woods',  (req, res) => {
     Wood.find({})
         .then(woods => {
-            res.status(200).json({success:true, woods});
+            res.status(200).send(woods);
         })
         .catch(err => {
             res.status(400).json({success:false, err});

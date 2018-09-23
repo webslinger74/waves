@@ -7,6 +7,7 @@ import Register from './components/RegisterLogin/Register';
 import Login from './components/RegisterLogin/Login';
 import UserLayout from './components/User/UserLayout';
 import PrivateRoute from './utils/PrivateRoute';
+import Shop from './components/shop/Shop';
 
 const Routes = ()=> {
     
@@ -20,6 +21,7 @@ const Routes = ()=> {
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={Register} />
                 <Route path="/register_login" exact component={RegisterLogin} />
+                <Route path="/shop"  exact component={Shop}/>
                 <Route path="/"  exact component={Home}/>
             </Switch>
             </Layout>

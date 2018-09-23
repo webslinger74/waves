@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
     GET_PRODUCTS_BY_ARRIVAL,
     GET_PRODUCTS_BY_SELL,
+    GET_BRANDS,
+    GET_WOODS,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
@@ -9,7 +11,7 @@ import {
 } from './types';
 
 export const getProductsByArrival = () => (dispatch) => {
-    axios.get('/api/productsGuitars/guitars_by_sortby?sortBy=createdAt&order=asc&limit=4')
+    axios.get('/api/productsGuitars/guitars_by_sortby?sortBy=createdAt&order=desc&limit=4')
         .then((res) => {
             console.log(res.data, "this should be the guitars");
             dispatch({
@@ -39,3 +41,29 @@ export const getProductsBySell = () => (dispatch) => {
     })
 }
 
+export const getBrands = () => (dispatch) => {
+    axios.get('/api/productsBrands/brands')
+        .then((res) => {
+            dispatch({
+                type:GET_BRANDS,
+                payload:res.data
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+
+export const getWoods = () => (dispatch) => {
+    axios.get('/api/productsWoods/woods')
+    .then((res) => {
+        dispatch({
+            type:GET_WOODS,
+            payload:res.data
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
