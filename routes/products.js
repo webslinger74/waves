@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 
 //this is getting by SELL ie how many sold  sortBy=sold
 // api/
-router.get('/guitars_by_sales', (req,res) => {
+router.get('/guitars_by_sortby', (req,res) => {
     let order = req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
     let limit = req.query.limit ? parseInt(req.query.limit) : 100;
