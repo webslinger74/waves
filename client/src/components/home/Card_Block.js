@@ -1,41 +1,43 @@
 import React from 'react';
+import Card from './Card';
 
-const  CardBlock = ({ products }) => {
+
+const  CardBlock = ({ item , title}) => {
 
     const renderCards = () => (
-        products ? 
-        products.map((card,i) => (
+        item ? 
+        item.map((card,i) => (
 
                 <div className="card_item_wrapper" key={i}>
                     <h1>title of the guitar</h1>
-                    <div className="brand">{card.brand.name}</div>
-                    <div className="name" >{card.name}</div>
-                   <div className="price">{card.price}</div>
+
+                        <Card card={card} />
+                  
                 </div>
             )) : null
     )
-  /*  {
-        props.title ?
-        <div className="title">
-        {props.title}
-        </div>
-        : null
-    }
-<div style={{
-    display:'flex',
-    flexWrap:'Wrap'
-}}>
-*/
+ 
     return (
 
             <div className="card_block">
             <div className="container">
-    
+                {
+                   title ?
+                 <div className="title">
+                      {title}
+                 </div>
+                        : null
+                        }
+                         <div style={{
+                        display:'flex',
+                         flexWrap:'Wrap'
+                       }}>
+
            
-                { renderCards(products)}
+                { renderCards(item)}
             </div>
             </div>
-            
+            </div>
 
       );
 }

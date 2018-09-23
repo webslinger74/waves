@@ -15,34 +15,35 @@ class Home extends Component {
 
     componentDidMount(){
         this.props.getProductsByArrival();
-      //  this.props.getProductsBySell();
+        this.props.getProductsBySell();
     }
 
 
 
 
     render() { 
-        const { products } = this.props;
+        const { products, sold } = this.props;
 
         return ( 
             <div>
                 <HomeSlider  />
-              
+                <CardBlock item={sold} title={"Most Popular Selling Guitars"} />
                 <HomePromotion />
                 <div></div>
-                <CardBlock  products={products} />
+                <CardBlock  item={products} title={"New Arrivals In Store"} />
             </div>
          );
     }
 }
 
 const actions = {
-    getProductsByArrival  //,
- //   getProductsBySell
+    getProductsByArrival,
+    getProductsBySell
 }
 
 const mapStateToProps = (state) => ({
-    products: state.products.arrival
+    products: state.products.arrival,
+    sold: state.products.sold
 })
  
 export default connect(mapStateToProps, actions)(Home);

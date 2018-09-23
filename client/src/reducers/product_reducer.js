@@ -11,8 +11,13 @@ import {
             case GET_PRODUCTS_BY_ARRIVAL:
                 return {
                     ...state,
-                    arrival : action.payload
-                };
+                    arrival: action.payload
+                }
+                case GET_PRODUCTS_BY_SELL:
+                return {
+                    ...state,
+                    sold:action.payload
+                }   
             default:
                 return state;
      }

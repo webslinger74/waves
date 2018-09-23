@@ -24,11 +24,14 @@ const HomeSlider = (props) => {
     ]
    
     const settings = {
+        autoplay:true,
+        autoplaySpeed:4000,
         dots: false,
         infinite: true,
-        speed: 500,
+        speed:3000,
         slidesToShow:1,
         arrows: false
+       
     }
    
   const generateSlides = () => (
