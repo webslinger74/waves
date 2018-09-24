@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions/user_actions';
 
 
 class Header extends Component {
@@ -76,6 +77,9 @@ class Header extends Component {
                     }                 
                 }           
         } else {
+
+
+
             if(type === this.state.user){
                 type.filter(link => {
                     if(link.public === false){
@@ -83,8 +87,12 @@ class Header extends Component {
                     }
                 })
                 const newlist = list.map((item, i) => {
-                    return this.defaultLinks(item,i)
-                })
+                    if(item.name !== "My Cart"){
+                    return this.defaultLinks(item,i);
+                    } else {
+                        return this.cartLink(item,i);
+                    }
+                });
                 console.log(newlist, "this is the post list")
                 return newlist;
             }
@@ -100,12 +108,37 @@ class Header extends Component {
         }
     }
 
+    cartLink = (item,i) => {
+        if(this.props.currentUser){
+        const  currentUser  = this.props.currentUser;
+        console.log(currentUser, "this is the user from in the component");
+        
+        return (
+            <div className="cart_link" key={i}>
+                <span>{currentUser.cart ? currentUser.cart.length : 0}</span>
+                <Link to={item.linkTo}>
+                    {item.name}
+                </Link>
+            </div>
+        )
+    }
+}
 
     defaultLinks = (item, i) => (
-        <Link key={i} to={item.linkTo}>{item.name}</Link>
-        )
-    
+        item.name === 'Log Out' ?
+            <div className="log_out_link"
+                key={i}
+                onClick={() => this.props.logoutUser(this.props.history)}
+                >
 
+                 {item.name}
+
+            </div>:
+                 <Link key={i} to={item.linkTo}>{item.name}</Link>
+        
+                 )
+    
+    
 
 
 
@@ -146,12 +179,15 @@ class Header extends Component {
  
 
 const mapStateToProps = (state) => ({
-    auth: state.auth.isAuthenticated
+    auth: state.auth.isAuthenticated,
+    currentUser: state.auth.FullUserRecord
 })
 
+const actions = {
+    logoutUser
+}
 
-
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(withRouter(Header));
 
 
 
