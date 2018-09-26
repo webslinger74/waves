@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PageTop from '../../utils/PageTop';
 import { connect } from 'react-redux';
 import { getBrands, getWoods } from '../../actions/product_actions';
-
+import Frets from './Frets';
 import CollapseCheckBox from '../Inputs/CollapseCheckBox';
 
 class Shop extends Component {
-
-    state = {
+        constructor(props){
+            super(props);
+        
+    this.state = {
         filters:{
             brands:[],
             frets:[],
@@ -15,21 +17,24 @@ class Shop extends Component {
             woods:[]
         }
     }
+}
   
     componentDidMount(){
         this.props.getBrands();
         this.props.getWoods();
     }
 
-    handleFilters = (filters,title) => {
-        const newFilters = {...this.state.filters}
+    handleFilters = (filter,title) => {
 
-        newFilters[title] = filters
-
-            this.setState({
+        const newFilters = this.state.filters;
+            console.log(newFilters, "this is pre filters add")
+        newFilters[title] = filter
+            console.log(newFilters, "this is post add of filter")
+            this.setState({ 
+                ...this.state,
                 filters: newFilters
             })
-
+            
         console.log(this.state, "state of shop")
     }
 
@@ -51,15 +56,22 @@ class Shop extends Component {
                             initState={true}
                             title="brands"
                             names={brands}  
-                            handleFilters={(filters) => 
-                                this.handleFilters(filters, 'brands')}
+                            handleFilters={(filters,title) => 
+                                this.handleFilters(filters,title)}
                             />
                              <CollapseCheckBox 
                             initState={true}
                             title="woods"
                             names={woods}  
-                            handleFilters={(filters) => 
-                                this.handleFilters(filters, 'woods')}
+                            handleFilters={(filters,title) => 
+                                this.handleFilters(filters, title)}
+                            />
+                             <CollapseCheckBox 
+                            initState={true}
+                            title="frets"
+                            names={Frets}  
+                            handleFilters={(filters,title) => 
+                                this.handleFilters(filters, title)}
                             />
                         </div>
                         <div className="right">
