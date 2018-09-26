@@ -1,28 +1,35 @@
 const Prices = [
     {
-        price:[],
-        _id:0
+        "name":"Any",
+        "_id":0,
+        "array":[]
     },
     {
-        price:[0,200],
-        _id:1
+        "name":"£0 to £299",
+        "_id":1,
+        "array":[0,299]
     },
     {
-        price:[201,400],
-        _id:2
+        "name":"£300 - £599",
+        "_id":2,
+        "array":[300,599]
     },
     {
-        price:[401,600],
-        _id:3
+        "name":"£600 - £999",
+        "_id":3,
+        "array":[600,999]
     },
     {
-        price:[601,1200],
-        _id:4
+        "name":"£1000 to £1999",
+        "_id":4,
+        "array":[1000,1999]
     },
     {
-        price:[1200,5000],
-        _id:5
-    }
+        "name":"More than £2000",
+        "_id":5,
+        "array":[2000,10000000]
+    },
+    
 ]
  
 export default Prices;
