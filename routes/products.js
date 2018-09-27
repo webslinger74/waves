@@ -80,6 +80,42 @@ router.post('/guitars', passport.authenticate('jwt', {session:false}), admin, (r
 })
 
 
+// needs to return data.size, data.articles
+router.post('/shop', (req, res) => {
+
+        let order = req.body.order ? req.body.order : "desc";
+        let sortBy = req.body.sortBy ? req.body.sortBy :"_id";
+        let limit = req.body.limit ? parseInt(req.body.limit) : 100;
+        const skip = parseInt(req.body.skip);
+        const filters = req.body.filters;
+        let findArgs = {};
+
+        for(let key in filters){
+            if(filters[key].length > 0){
+                if(key === "price"){
+                    findArgs[key] = {
+                        $gte:req.body.filters[key][0],
+                        $lte:req.body.filters[key][1]
+                    }
+                } else {
+                    findArgs[key] = filters[key];
+                }
+            }
+        }
+            Product.find(findArgs)
+            .populate('brand')
+            .populate('woods')
+            .sort([[sortBy, order]])
+            .skip(skip)
+            .limit(limit)
+            .exec(() => {
+
+            })
+        
+            
+})
+
+
 
 
 

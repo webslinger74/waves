@@ -30,9 +30,11 @@ class CollapseRadio extends Component {
     componentDidMount(){
         if(this.props.initState){
             this.setState({
+                ...this.state,
                 open: this.props.initState
             })
       }
+      console.log(this.state, "state after mounting");
     }
     renderList = () => (
         this.props.names ? 
@@ -47,11 +49,12 @@ class CollapseRadio extends Component {
     )
 
     handleChange = (event) => {
-        this.setState({
+        console.log(event, "the event");
+          this.setState({
             ...this.state,
             value: event.target.value
         })
-        const priceRange = this.state.value;
+        const priceRange = event.target.value;
         console.log(priceRange, "the price state");
     
     
@@ -61,6 +64,7 @@ class CollapseRadio extends Component {
 
     handleClick = () => {
         this.setState({
+            ...this.state,
             open: !this.state.open
         })
     }

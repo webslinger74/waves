@@ -4,6 +4,7 @@ import {
     GET_PRODUCTS_BY_SELL,
     GET_BRANDS,
     GET_WOODS,
+    GET_PRODUCTS_TO_SHOP,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
@@ -67,3 +68,23 @@ export const getWoods = () => (dispatch) => {
         console.log(err)
     })
 }
+
+export const getProductsToShop = (skip, limit, filters = [], previousState = [] ) =>  (dispatch) => {
+
+          const data = {
+                     limit,
+                     skip,
+                     filters
+                      }
+
+                 axios.post('/api/productsGuitars/shop', data)
+                .then(response => {
+                        dispatch({
+                        type:GET_PRODUCTS_TO_SHOP,
+                        payload:{
+                        size:response.data.size,
+                        articles:response.data.articles
+                    }
+                })
+            })    
+};

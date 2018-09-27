@@ -2,7 +2,8 @@ import {
     GET_PRODUCTS_BY_ARRIVAL,
     GET_PRODUCTS_BY_SELL,
     GET_BRANDS,
-    GET_WOODS
+    GET_WOODS,
+    GET_PRODUCTS_TO_SHOP
  } from '../actions/types';
 
 
@@ -20,6 +21,12 @@ import {
                     ...state,
                     sold:action.payload
                 } 
+                case GET_PRODUCTS_TO_SHOP:
+                return {
+                    ...state,
+                    articleSize:action.payload.size,
+                    articles: action.payload.articles
+                }
                 case GET_BRANDS:
                 return {
                     ...state,

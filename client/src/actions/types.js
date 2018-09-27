@@ -10,3 +10,4 @@ export const GET_BRANDS = "GET_BRANDS";
 export const GET_WOODS = "GET_WOODS";
 export const USER_DETAILS = "USER_DETAILS";
 export const CLEAR_USER_DETAILS = "CLEAR_USER_DETAILS";
+export const GET_PRODUCTS_TO_SHOP = "GET_PRODUCTS_TO_SHOP";
