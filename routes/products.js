@@ -83,12 +83,14 @@ router.post('/guitars', passport.authenticate('jwt', {session:false}), admin, (r
 // needs to return data.size, data.articles
 router.post('/shop', (req, res) => {
 
+        
+
         let order = req.body.order ? req.body.order : "desc";
         let sortBy = req.body.sortBy ? req.body.sortBy :"_id";
         let limit = req.body.limit ? parseInt(req.body.limit) : 100;
         const skip = parseInt(req.body.skip);
         const filters = req.body.filters;
-        let findArgs = {};
+        let findArgs = {};  // this will find all if not arrays are greater than 0
 
         for(let key in filters){
             if(filters[key].length > 0){
@@ -102,21 +104,25 @@ router.post('/shop', (req, res) => {
                 }
             }
         }
+            console.log(findArgs, "this is the args pre mongo req");
+
+
             Product.find(findArgs)
             .populate('brand')
-            .populate('woods')
+            .populate('wood')
             .sort([[sortBy, order]])
             .skip(skip)
             .limit(limit)
-            .exec(() => {
+            .exec((err, articles) => {
+                if(err) return res.status(400).send(err);
+                res.status(200).json({
+                        size:articles.length,
+                        articles
+                });
 
             })
-        
+        })
             
-})
-
-
-
-
+    
 
 module.exports = router;

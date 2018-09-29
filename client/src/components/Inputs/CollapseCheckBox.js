@@ -53,8 +53,8 @@ class CollapseCheckBox extends Component {
       checked: newChecked
     });
 
-    console.log(newChecked, "the collapse state");
-    console.log(this.state.checked)
+  //  console.log(newChecked, "the collapse state");
+  //  console.log(this.state.checked)
 
     this.props.handleFilters(newChecked, this.props.title)
   };
@@ -69,7 +69,7 @@ class CollapseCheckBox extends Component {
     
     const { names } = this.props;
     if(names){
-    console.log(names, "this is the brands/woods")
+  //  console.log(names, "this is the brands/woods")
     }
     return (
 

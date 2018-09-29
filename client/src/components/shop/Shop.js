@@ -17,10 +17,10 @@ class Shop extends Component {
         limit:6,
         skip:0,
         filters:{
-            brands:[],
+            brand:[],
             frets:[],
             price:[],
-            woods:[]
+            wood:[]
         }
     }
 }
@@ -44,17 +44,29 @@ class Shop extends Component {
            return array;
     }
 
+
+
+    showFilteredResults = (filters) => {
+        this.props.getProductsToShop(0,this.state.limit,filters)
+        this.setState({
+            ...this.state,
+            skip:0
+        })
+    }
+
     handleFilters = (filter,title) => {
 
         const newFilters = this.state.filters;
             console.log(newFilters, "this is pre filters add")
-        newFilters[title] = filter
-
+          
+            newFilters[title] = filter
             if(title === "price"){
                 let priceValues = this.handlePrice(filter)
                 newFilters[title] = priceValues;     
             
             }
+          
+            this.showFilteredResults(newFilters);
 
             this.setState({ 
                 ...this.state,
@@ -65,7 +77,7 @@ class Shop extends Component {
     render() { 
             
         const { brands, woods } = this.props;
-            console.log(brands, "this is brandy")
+       //     console.log(brands, "this is brandy")
             
         return (
 
@@ -78,14 +90,14 @@ class Shop extends Component {
                         <div className="left">
                             <CollapseCheckBox 
                             initState={true}
-                            title="brands"
+                            title="brand"
                             names={brands}  
                             handleFilters={(filters,title) => 
                                 this.handleFilters(filters,title)}
                             />
                              <CollapseCheckBox 
                             initState={true}
-                            title="woods"
+                            title="wood"
                             names={woods}  
                             handleFilters={(filters,title) => 
                                 this.handleFilters(filters, title)}

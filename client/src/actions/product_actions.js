@@ -76,9 +76,14 @@ export const getProductsToShop = (skip, limit, filters = [], previousState = [] 
                      skip,
                      filters
                       }
+                      
+                      console.log(data, "this is the data")
 
                  axios.post('/api/productsGuitars/shop', data)
                 .then(response => {
+
+                        console.log(response, "this is the responers!!");
+
                         dispatch({
                         type:GET_PRODUCTS_TO_SHOP,
                         payload:{

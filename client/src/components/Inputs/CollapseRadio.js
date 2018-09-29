@@ -97,10 +97,7 @@ class CollapseRadio extends Component {
             > 
                  
                 <List component="div" disablePadding>
-                <ListItemText 
-                    primary={this.props.title}
-                    className="collapse_title"
-                    />
+               
                 <RadioGroup 
                         aria-label="Prices"
                         name="prices"
