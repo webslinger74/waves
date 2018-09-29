@@ -9,7 +9,7 @@ class Card extends Component {
     }
 
     renderCardImage(images){
-        console.log(images);
+        console.log(images, "this is the images");
        
         if(images && images.length > 0){
                 return image[0].url
