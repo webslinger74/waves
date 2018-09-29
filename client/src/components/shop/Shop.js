@@ -6,7 +6,8 @@ import Frets from './Frets';
 import Prices from './Prices';
 import CollapseCheckBox from '../Inputs/CollapseCheckBox';
 import CollapseRadio from '../Inputs/CollapseRadio';
-
+import LoadMoreCarts from './LoadMoreCarts';
+import CardBlockShop from '../Inputs/CardBlockShop';
 
 class Shop extends Component {
         constructor(props){
@@ -89,28 +90,28 @@ class Shop extends Component {
                     <div className="shop_wrapper">
                         <div className="left">
                             <CollapseCheckBox 
-                            initState={true}
+                            initState={false}
                             title="brand"
                             names={brands}  
                             handleFilters={(filters,title) => 
                                 this.handleFilters(filters,title)}
                             />
                              <CollapseCheckBox 
-                            initState={true}
+                            initState={false}
                             title="wood"
                             names={woods}  
                             handleFilters={(filters,title) => 
                                 this.handleFilters(filters, title)}
                             />
                              <CollapseCheckBox 
-                            initState={true}
+                            initState={false}
                             title="frets"
                             names={Frets}  
                             handleFilters={(filters,title) => 
                                 this.handleFilters(filters, title)}
                             />
                              <CollapseRadio 
-                            initState={false}
+                            initState={true}
                             title="price"
                             names={Prices}  
                             handleFilters={(filters,title) => 
@@ -118,7 +119,20 @@ class Shop extends Component {
                             />
                         </div>
                         <div className="right">
-                            Right
+                        <div className="shop_options">
+                                <div className="shop_grids clear">
+                                    grids
+                                
+                                </div>
+                        
+                        </div>
+                            <LoadMoreCarts
+                                grid={this.state.grid}
+                                limit={this.state.limit}
+                                size={this.props.products.articleSize}
+                                products={this.props.products.articles}
+                                loadmore={() => console.log("load more")}
+                                />
                         
                         </div>
                     
