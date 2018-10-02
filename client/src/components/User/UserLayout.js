@@ -2,14 +2,29 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import UserDashboard from './UserDashboard';
 import { connect } from 'react-redux';
-
+import admin from './admin';
 
 class UserLayout extends Component {
      constructor(props){
          super(props)
      }
+
+    genLinks = () => (
+        <div>
+         <h2>Admin</h2>
+           {admin.map((item,index) => {
+             return (
+                <div className="links" key={index} > 
+                <Link  to={item.linkTo}>{item.name}</Link> 
+             </div>
+             ) 
+            })}
+            </div>
+    )
+
+
     render() { 
-            const { auth } = this.props;
+            const { auth, isAdd } = this.props;
 
         return (
             <div className="container">
@@ -22,6 +37,12 @@ class UserLayout extends Component {
             <Link to="/user/user_profile">User Information</Link>
             <Link to="user/cart">My Cart</Link>
             </div>
+            {console.log(isAdd, "recs")}
+            {isAdd && isAdd.isAdmin ? 
+            this.genLinks()
+        : null}
+
+
             </div>
             <div className="user_right">
             <UserDashboard auth={auth} />
@@ -38,7 +59,9 @@ const actions = {
 
 }
 const mapStateToProps = (state) => ({
+    isAdd: state.auth.FullUserRecord,
     auth: state.auth
+   
 })
  
 export default connect(mapStateToProps, actions)(UserLayout);
