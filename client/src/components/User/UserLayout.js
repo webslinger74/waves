@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import UserDashboard from './UserDashboard';
 import { connect } from 'react-redux';
 import admin from './admin';
+import AddProduct from '../admin/Add_product';
 
 class UserLayout extends Component {
      constructor(props){
@@ -45,7 +46,7 @@ class UserLayout extends Component {
 
             </div>
             <div className="user_right">
-            <UserDashboard auth={auth} />
+                     {this.props.children}
             
             
             </div>

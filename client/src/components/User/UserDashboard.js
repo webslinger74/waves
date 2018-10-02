@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import UserLayout from './UserLayout';
 import MyButton from '../Inputs/Button';
+import { connect } from 'react-redux';
 
 
+class UserDashboard extends Component {
 
-const UserDashboard = ({auth}) => {
+    render(){
+            const {auth} = this.props;
+            
     return (
+        <UserLayout>
         <div>
     
         <div className="user_nfo_panel">
@@ -31,9 +36,13 @@ const UserDashboard = ({auth}) => {
         </div>
         
 </div>
-
-        
+    </UserLayout>
       )
 }
+}
+
+const mapStateToProps = (state) => ({
+    auth:state.auth
+})
  
-export default UserDashboard;
+export default connect(mapStateToProps)(UserDashboard);

@@ -12,6 +12,10 @@ const TextAreaFieldGroup = ({
 }) => {
     return (
         <div className="form-group">
+         {placeholder ? 
+            <div className="label_inputs">{placeholder}</div>
+            :null
+        }
         <textarea  
           className={classnames("form-control form-control-lg", {
       'is-invalid':error})}
