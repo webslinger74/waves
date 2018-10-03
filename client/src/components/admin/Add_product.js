@@ -5,6 +5,19 @@ import {getBrands, getWoods} from '../../actions/product_actions';
 import TextFieldGroup from '../Inputs/TextFieldGroup';
 import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
+import Frets from '../shop/Frets';
+
+
+const Bool = [
+    {
+        "name":"YES",
+        "_id":1
+    },
+    {
+        "name":"NO",
+        "_id":0
+    }
+]
 
 class AddProduct extends Component {
     constructor(props) {
@@ -15,6 +28,10 @@ class AddProduct extends Component {
                 price: '',
                 brand: '',
                 wood: '',
+                shipping:'',
+                available:'',
+                frets:'',
+                publish:'',
                 errors: {}
               };
              
@@ -31,7 +48,7 @@ class AddProduct extends Component {
     
           componentDidMount(){
               this.props.getBrands();
-              console.log("what a fucker")
+              this.props.getWoods();
           }
 
 
@@ -68,8 +85,74 @@ class AddProduct extends Component {
                                  value={this.state.price}
                                  onChange={this.onChange}
                             />
-            
 
+                <div className="form_devider"></div>
+                            {this.props.brands ?
+                <SelectListGroup 
+                                 name="brand"
+                                 value={this.state.brand}
+                                 error={errors.brands}
+                                 onChange={this.onChange}
+                                 options={this.props.brands}
+                                 placeholder="Guitar Brands"
+                            
+                            
+                            />: null}
+
+
+                               {this.props.woods ?
+                            <SelectListGroup 
+                                             name="wood"
+                                             value={this.state.wood}
+                                             error={errors.brands}
+                                             onChange={this.onChange}
+                                             options={this.props.woods}
+                                             placeholder="Type of Wood"
+                                        
+                                        
+                                        />: null}
+                                        
+                                   <div className="form_devider"></div>
+
+                                     <SelectListGroup 
+                                 type="text"
+                                 placeholder="Shipping"
+                                 name="shipping"
+                                 error={errors.shipping}
+                                 value={this.state.shipping}
+                                 onChange={this.onChange}
+                                 options={Bool}
+                            />
+                                  <SelectListGroup
+                                 type="text"
+                                 placeholder="Available"
+                                 name="available"
+                                 error={errors.available}
+                                 value={this.state.available}
+                                 onChange={this.onChange}
+                                 options={Bool}
+                            />
+                              <SelectListGroup
+                                 type="text"
+                                 placeholder="Frets"
+                                 name="frets"
+                                 error={errors.frets}
+                                 value={this.state.frets}
+                                 onChange={this.onChange}
+                                 options={Frets}
+                            />
+                            <div className="form_devider"></div>
+                            <SelectListGroup
+                                 type="text"
+                                 placeholder="Publish"
+                                 name="publish"
+                                 error={errors.publish}
+                                 value={this.state.publish}
+                                 onChange={this.onChange}
+                                 options={Bool}
+                            />
+
+              
                 </form>
             </div>
 
@@ -87,7 +170,8 @@ const actions = {
 const mapStateToProps = (state) => ({
     products:state.products,
     errors:state.errors,
-    brands:state.products.brands
+    brands:state.products.brands,
+    woods:state.products.woods
 
 })
  
