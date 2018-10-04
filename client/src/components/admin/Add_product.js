@@ -64,8 +64,8 @@ class AddProduct extends Component {
                             console.log(this.state[key],"the pissing") 
                             console.log(brandobj.name)  
                         if(brandobj.name === this.state[key]){
-                            console.log("fucking true");
-                            console.log(brandobj._id), "this should be the fucking id";
+                            console.log("true");
+                            console.log(brandobj._id), "this should be the id";
                                 return brandobj._id;
                             }
                             console.log(getId, "this is get id")
@@ -76,11 +76,11 @@ class AddProduct extends Component {
                     if(key === "wood"){
                         console.log("true", key)
                      const getId = this.props.woods.filter((woodobj) => {
-                            console.log(this.state[key],"the pissing") 
+                            console.log(this.state[key]) 
                             console.log(woodobj.name)  
                         if(woodobj.name === this.state[key]){
-                            console.log("fucking true");
-                            console.log(woodobj._id), "this should be the fucking id";
+                            console.log("true");
+                            console.log(woodobj._id), "this should be the id";
                                 return woodobj._id;
                             }
                             console.log(getId, "this is get id")
