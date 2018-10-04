@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserLayout from '../User/UserLayout';
 import {connect} from 'react-redux';
-import {getBrands, getWoods} from '../../actions/product_actions';
+import {getBrands, getWoods, addProduct} from '../../actions/product_actions';
 import TextFieldGroup from '../Inputs/TextFieldGroup';
 import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
@@ -42,10 +42,62 @@ class AddProduct extends Component {
           
             onSubmit = (e) => {
               e.preventDefault();
-          
-            
+                const newProduct = this.state;
+
+             const newState = {};
+               for (let key in this.state){
+              
+                    if(this.state[key] === "YES"){
+                        this.state[key] = true;
+                    }
+                    if(this.state[key] === "NO"){
+                        this.state[key] = false;
+                    }
+                    if( key === "price" ){
+                        this.state[key] = parseFloat(this.state[key])
+                    }
+
+                    
+                    if(key === "brand"){
+                        console.log("true", key)
+                     const getId = this.props.brands.filter((brandobj) => {
+                            console.log(this.state[key],"the pissing") 
+                            console.log(brandobj.name)  
+                        if(brandobj.name === this.state[key]){
+                            console.log("fucking true");
+                            console.log(brandobj._id), "this should be the fucking id";
+                                return brandobj._id;
+                            }
+                            console.log(getId, "this is get id")
+                           
+                        })
+                        this.state[key] = getId[0]._id;
+                    }
+                    if(key === "wood"){
+                        console.log("true", key)
+                     const getId = this.props.woods.filter((woodobj) => {
+                            console.log(this.state[key],"the pissing") 
+                            console.log(woodobj.name)  
+                        if(woodobj.name === this.state[key]){
+                            console.log("fucking true");
+                            console.log(woodobj._id), "this should be the fucking id";
+                                return woodobj._id;
+                            }
+                            console.log(getId, "this is get id")
+                           
+                        })
+                        this.state[key] = getId[0]._id;
+                    }
+
+
+                    newState[key] = this.state[key];
+
+                
+                console.log(newState, "does this have true and false")
+               this.props.addProduct(newState);
+ 
           }
-    
+        }
           componentDidMount(){
               this.props.getBrands();
               this.props.getWoods();
@@ -152,7 +204,8 @@ class AddProduct extends Component {
                                  options={Bool}
                             />
 
-              
+                <input type="submit" className="btn btn-info btn-block mt-4" />
+
                 </form>
             </div>
 
@@ -164,7 +217,8 @@ class AddProduct extends Component {
 }
 const actions = {
     getBrands,
-    getWoods
+    getWoods,
+    addProduct
 }
 
 const mapStateToProps = (state) => ({

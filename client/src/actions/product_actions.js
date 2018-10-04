@@ -5,6 +5,7 @@ import {
     GET_BRANDS,
     GET_WOODS,
     GET_PRODUCTS_TO_SHOP,
+    ADD_PRODUCT,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
@@ -93,3 +94,14 @@ export const getProductsToShop = (skip, limit, filters = [], previousState = [] 
                 })
             })    
 };
+
+export const addProduct = (brands) => (dispatch) => {
+    console.log(brands, "this is the brands prior to axios request ");
+    const request = axios.post('/api/productGuitars/guitars', brands)
+        .then(response => response.data);
+    console.log(request, "this is the response from axios")
+      return {
+          type:ADD_PRODUCT,
+          payload: request
+      }  
+}

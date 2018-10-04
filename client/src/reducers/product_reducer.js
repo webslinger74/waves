@@ -3,7 +3,8 @@ import {
     GET_PRODUCTS_BY_SELL,
     GET_BRANDS,
     GET_WOODS,
-    GET_PRODUCTS_TO_SHOP
+    GET_PRODUCTS_TO_SHOP,
+    ADD_PRODUCT
  } from '../actions/types';
 
 
@@ -36,7 +37,12 @@ import {
                 return {
                     ...state,
                     woods:action.payload
-                }         
+                } 
+                case ADD_PRODUCT:
+                return {
+                    ...state,
+                    addProduct:action.payload
+                }        
             default:
                 return state;
      }
