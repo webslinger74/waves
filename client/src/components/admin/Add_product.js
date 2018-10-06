@@ -7,6 +7,7 @@ import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
 import Frets from '../shop/Frets';
 import MyButton from '../Inputs/Button';
+import FileUpload from './FileUpload';
 
 const Bool = [
     {
@@ -33,7 +34,8 @@ class AddProduct extends Component {
                 frets:'',
                 publish:'',
                 errors: {},
-                formSuccess: false
+                formSuccess: false,
+                images: []
               };
              
             }
@@ -96,7 +98,6 @@ class AddProduct extends Component {
           }
 
           componentDidUpdate(prevProps) {
-         console.log(Object.keys(this.props.errors).length, "errors length")
             if((prevProps.errors !== this.props.errors) && (Object.keys(this.props.errors).length === 0)){
                 this.setState({
                     name: '',
@@ -116,8 +117,6 @@ class AddProduct extends Component {
                         formSuccess:false
                     })
                 },1500);
-                console.log(this.state, "the state with form success??")
-                console.log(this.state.formSuccess, "formsuccess state")
             }
 
            
@@ -132,6 +131,10 @@ class AddProduct extends Component {
         }
       
 
+    imagesHandler = (images) => {
+
+    }
+
     render() { 
         const {errors} = this.state;
         console.log(this.props.brands && this.props.brands, "these are brands");
@@ -141,6 +144,14 @@ class AddProduct extends Component {
             <div>
                 <h1>Add Product</h1>
                 <form onSubmit={(event) => this.onSubmit(event)}>
+                
+                <FileUpload 
+                    imagesHandler={(images) => this.imagesHandler(images)}
+
+                
+                
+                />
+                
                 <TextFieldGroup 
                                  type="text"
                                  placeholder="Product Name"
