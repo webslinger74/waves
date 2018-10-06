@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const admin = require('../config/admin');
 const mongoose = require('mongoose');
-
+const validateAddProduct = require('../validation/addproduct');
 
 //this is getting by Arrival ie Created At   sortBy=createdAt
 
@@ -56,6 +56,16 @@ router.get('/guitars_byId', (req, res) => {
 
 
 router.post('/guitars', passport.authenticate('jwt', {session:false}), admin, (req, res) => {
+
+    const { errors, isValid } = validateAddProduct(req.body);
+    console.log(req.body, "this is the info to be validated")
+    if (!isValid) {
+        console.log(errors)
+        return res.status(400).json(errors);
+       
+    }
+
+        console.log(req.body, "this is the request inside route")
             const product = new Product({
                 name:req.body.name,
                 description:req.body.description,
@@ -67,7 +77,7 @@ router.post('/guitars', passport.authenticate('jwt', {session:false}), admin, (r
                 frets:req.body.frets,
                 publish:req.body.publish
             });
-
+            console.log(product, "this is the product")
             product.save()
                 .then(brand => {
                     res.status(200).json({success:true, brand});

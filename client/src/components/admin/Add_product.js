@@ -42,7 +42,6 @@ class AddProduct extends Component {
           
             onSubmit = (e) => {
               e.preventDefault();
-                const newProduct = this.state;
 
              const newState = {};
                for (let key in this.state){
@@ -54,58 +53,54 @@ class AddProduct extends Component {
                         this.state[key] = false;
                     }
                     if( key === "price" ){
-                        this.state[key] = parseFloat(this.state[key])
+                        this.state[key] = this.state[key].toString();
                     }
 
-                    
                     if(key === "brand"){
-                        console.log("true", key)
                      const getId = this.props.brands.filter((brandobj) => {
-                            console.log(this.state[key],"the pissing") 
-                            console.log(brandobj.name)  
                         if(brandobj.name === this.state[key]){
-                            console.log("true");
-                            console.log(brandobj._id), "this should be the id";
                                 return brandobj._id;
-                            }
-                            console.log(getId, "this is get id")
-                           
+                          }
                         })
-                        this.state[key] = getId[0]._id;
+                        console.log(getId, "is it an empty array??")
+                        if(getId.length === 0){
+                            console.log(getId, "if undefined??")
+                            this.state[key] = undefined;
+                        } else {
+                            this.state[key] = getId[0]._id
+                        }
                     }
                     if(key === "wood"){
-                        console.log("true", key)
                      const getId = this.props.woods.filter((woodobj) => {
-                            console.log(this.state[key]) 
-                            console.log(woodobj.name)  
                         if(woodobj.name === this.state[key]){
-                            console.log("true");
-                            console.log(woodobj._id), "this should be the id";
                                 return woodobj._id;
                             }
-                            console.log(getId, "this is get id")
-                           
                         })
-                        this.state[key] = getId[0]._id;
+                        if(getId.length === 0){
+                            this.state[key] = undefined;
+                        } else {
+                            this.state[key] = getId[0]._id
+                        }
                     }
-
-
                     newState[key] = this.state[key];
-
-                
-                console.log(newState, "does this have true and false")
-               this.props.addProduct(newState);
- 
           }
+          this.props.addProduct(newState);
+
         }
+
           componentDidMount(){
               this.props.getBrands();
               this.props.getWoods();
           }
 
+          componentWillReceiveProps(nextProps) {
+            if(nextProps.errors){
+              this.setState({errors:nextProps.errors})
+        }}
+      
 
     render() { 
-        const {errors} = this.props;
+        const {errors} = this.state;
         console.log(this.props.brands && this.props.brands, "these are brands");
         return (
             
@@ -143,7 +138,7 @@ class AddProduct extends Component {
                 <SelectListGroup 
                                  name="brand"
                                  value={this.state.brand}
-                                 error={errors.brands}
+                                 error={errors.brand}
                                  onChange={this.onChange}
                                  options={this.props.brands}
                                  placeholder="Guitar Brands"
@@ -156,7 +151,7 @@ class AddProduct extends Component {
                             <SelectListGroup 
                                              name="wood"
                                              value={this.state.wood}
-                                             error={errors.brands}
+                                             error={errors.wood}
                                              onChange={this.onChange}
                                              options={this.props.woods}
                                              placeholder="Type of Wood"
@@ -203,6 +198,14 @@ class AddProduct extends Component {
                                  onChange={this.onChange}
                                  options={Bool}
                             />
+
+                             <div>
+                            { this.state.formError ?
+                                <div className="error_label">
+                                    Please check your data
+                                </div>
+                            :null}
+                            </div>
 
                 <input type="submit" className="btn btn-info btn-block mt-4" />
 

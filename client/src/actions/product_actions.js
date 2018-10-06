@@ -6,6 +6,7 @@ import {
     GET_WOODS,
     GET_PRODUCTS_TO_SHOP,
     ADD_PRODUCT,
+    GET_ERRORS,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
@@ -77,14 +78,9 @@ export const getProductsToShop = (skip, limit, filters = [], previousState = [] 
                      skip,
                      filters
                       }
-                      
-                      console.log(data, "this is the data")
 
                  axios.post('/api/productsGuitars/shop', data)
                 .then(response => {
-
-                        console.log(response, "this is the responers!!");
-
                         dispatch({
                         type:GET_PRODUCTS_TO_SHOP,
                         payload:{
@@ -96,12 +92,17 @@ export const getProductsToShop = (skip, limit, filters = [], previousState = [] 
 };
 
 export const addProduct = (brands) => (dispatch) => {
-    console.log(brands, "this is the brands prior to axios request ");
-    const request = axios.post('/api/productGuitars/guitars', brands)
-        .then(response => response.data);
-    console.log(request, "this is the response from axios")
-      return {
+     axios.post('/api/productsGuitars/guitars', brands)
+        .then(response => {
+      dispatch({
           type:ADD_PRODUCT,
-          payload: request
-      }  
+          payload: response.data.brand
+      }) 
+    })
+    .catch((err) => {
+        dispatch({
+            type:GET_ERRORS,
+            payload:err.response.data
+        })
+})
 }
