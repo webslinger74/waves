@@ -20,6 +20,9 @@ const MyButton = (props,{
                 {...props.addStyles}
                 >{props.title}</Link>
             break;
+            case "submit":
+                template = <input value={props.title} className="link_default" type="submit"/>
+            break;
             default:
                 template = '';
         }

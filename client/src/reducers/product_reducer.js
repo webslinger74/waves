@@ -4,7 +4,8 @@ import {
     GET_BRANDS,
     GET_WOODS,
     GET_PRODUCTS_TO_SHOP,
-    ADD_PRODUCT
+    ADD_PRODUCT,
+    REMOVE_PRODUCT
  } from '../actions/types';
 
 
@@ -42,7 +43,12 @@ import {
                 return {
                     ...state,
                     addProduct:action.payload
-                }        
+                } 
+                case REMOVE_PRODUCT:
+                return {
+                    ...state,
+                    addProduct:action.payload
+                }       
             default:
                 return state;
      }

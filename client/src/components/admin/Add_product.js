@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import UserLayout from '../User/UserLayout';
 import {connect} from 'react-redux';
-import {getBrands, getWoods, addProduct} from '../../actions/product_actions';
+import {getBrands, getWoods, addProduct, removeProduct} from '../../actions/product_actions';
 import TextFieldGroup from '../Inputs/TextFieldGroup';
 import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
 import Frets from '../shop/Frets';
+import MyButton from '../Inputs/Button';
 
 const Bool = [
     {
@@ -85,15 +86,6 @@ class AddProduct extends Component {
                     newState[key] = this.state[key];
           }
         this.props.addProduct(newState);
-        this.setState({
-            formSuccess:true
-        })
-
-       
-         // console.log(Object.keys(this.props.errors), "the keys");
-          
-       //   console.log(Object.keys(this.props.errors).length, "the keys length");
-      
 
         }
 
@@ -103,9 +95,9 @@ class AddProduct extends Component {
               this.props.getWoods();
           }
 
-          componentWillReceiveProps(nextProps) {
-
-            if(Object.keys(nextProps.errors).length === 0){
+          componentDidUpdate(prevProps) {
+         console.log(Object.keys(this.props.errors).length, "errors length")
+            if((prevProps.errors !== this.props.errors) && (Object.keys(this.props.errors).length === 0)){
                 this.setState({
                     name: '',
                     description: '',
@@ -117,27 +109,26 @@ class AddProduct extends Component {
                     frets:'',
                     publish:'',
                     errors: {},
-                    formSuccess:false
+                    formSuccess:true
                 })
-                console.log(this.state, "the state with form success??")
-            
-            if(this.props.products.addProduct){
-                    this.setState({
-                        formSuccess:true
-                    })
                 setTimeout(() => {
                     this.setState({
                         formSuccess:false
                     })
-                },5000)
-            
+                },1500);
+                console.log(this.state, "the state with form success??")
+                console.log(this.state.formSuccess, "formsuccess state")
             }
-            
+
            
-            if(nextProps.errors){
-              this.setState({errors:nextProps.errors })
+            
+            if(prevProps.errors !== this.props.errors && Object.keys(this.props.errors).length > 0){
+                this.setState({
+                    errors:this.props.errors
+                })
             }
-        } 
+            
+            
         }
       
 
@@ -244,7 +235,7 @@ class AddProduct extends Component {
                              <div>
                                  
                             {this.state.formSuccess === true ? 
-                                (<div className="success">
+                                (<div className="form_success">
                                     You have succesfully added your Guitar
                                 </div>): null}
 
@@ -257,7 +248,7 @@ class AddProduct extends Component {
                             :null}
                             </div>
 
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                           <input type="submit" className="btn btn-info btn-block mt-4" />
 
                 </form>
             </div>
@@ -271,7 +262,8 @@ class AddProduct extends Component {
 const actions = {
     getBrands,
     getWoods,
-    addProduct
+    addProduct,
+    removeProduct
 }
 
 const mapStateToProps = (state) => ({

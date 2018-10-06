@@ -7,6 +7,7 @@ import {
     GET_PRODUCTS_TO_SHOP,
     ADD_PRODUCT,
     GET_ERRORS,
+    REMOVE_PRODUCT,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
@@ -109,4 +110,11 @@ export const addProduct = (brands) => (dispatch) => {
             payload:err.response.data
         })
 })
+}
+
+export const removeProduct = () => (dispatch) => {
+    dispatch({
+        type:REMOVE_PRODUCT,
+        payload: {}
+    })
 }
