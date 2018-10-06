@@ -98,6 +98,10 @@ export const addProduct = (brands) => (dispatch) => {
           type:ADD_PRODUCT,
           payload: response.data.brand
       }) 
+      dispatch({
+          type:GET_ERRORS,
+          payload: {}
+      })
     })
     .catch((err) => {
         dispatch({

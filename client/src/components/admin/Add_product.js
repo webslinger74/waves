@@ -7,7 +7,6 @@ import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
 import Frets from '../shop/Frets';
 
-
 const Bool = [
     {
         "name":"YES",
@@ -32,7 +31,8 @@ class AddProduct extends Component {
                 available:'',
                 frets:'',
                 publish:'',
-                errors: {}
+                errors: {},
+                formSuccess: false
               };
              
             }
@@ -84,9 +84,19 @@ class AddProduct extends Component {
                     }
                     newState[key] = this.state[key];
           }
-          this.props.addProduct(newState);
+        this.props.addProduct(newState);
+        this.setState({
+            formSuccess:true
+        })
+
+       
+         // console.log(Object.keys(this.props.errors), "the keys");
+          
+       //   console.log(Object.keys(this.props.errors).length, "the keys length");
+      
 
         }
+
 
           componentDidMount(){
               this.props.getBrands();
@@ -94,9 +104,41 @@ class AddProduct extends Component {
           }
 
           componentWillReceiveProps(nextProps) {
+
+            if(Object.keys(nextProps.errors).length === 0){
+                this.setState({
+                    name: '',
+                    description: '',
+                    price: '',
+                    brand: '',
+                    wood: '',
+                    shipping:'',
+                    available:'',
+                    frets:'',
+                    publish:'',
+                    errors: {},
+                    formSuccess:false
+                })
+                console.log(this.state, "the state with form success??")
+            
+            if(this.props.products.addProduct){
+                    this.setState({
+                        formSuccess:true
+                    })
+                setTimeout(() => {
+                    this.setState({
+                        formSuccess:false
+                    })
+                },5000)
+            
+            }
+            
+           
             if(nextProps.errors){
-              this.setState({errors:nextProps.errors})
-        }}
+              this.setState({errors:nextProps.errors })
+            }
+        } 
+        }
       
 
     render() { 
@@ -200,6 +242,14 @@ class AddProduct extends Component {
                             />
 
                              <div>
+                                 
+                            {this.state.formSuccess === true ? 
+                                (<div className="success">
+                                    You have succesfully added your Guitar
+                                </div>): null}
+
+
+
                             { this.state.formError ?
                                 <div className="error_label">
                                     Please check your data
