@@ -23,8 +23,10 @@ class FileUpload extends Component {
         }
         formData.append('file', files[0]);
 
-        axios.post('/api/user/uploadimage', formData, config)
+        axios.post('/api/users/uploadimage', formData, config)
             .then(response => {
+
+                console.log(response.data, "cloudinary response")
                 this.setState({
                     uploading:false,
                     uploadedFiles:[

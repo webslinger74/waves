@@ -9,7 +9,8 @@ const users = require('./routes/users');
 const brands = require('./routes/brands');
 const woods = require('./routes/woods');
 const passport = require('passport');
-
+const formidable = require('express-formidable');
+const cloudinary = require('cloudinary')
 
 const db = require('./config/keys.js').mongoURI;
 
@@ -23,8 +24,18 @@ mongoose.connect(db, {server: { auto_reconnect: true } } /*{ useNewUrlParser: tr
 const port = process.env.PORT || 5000;
 const app = express();
 
+//require('dotenv').config();
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+
+const cloudKeys = require('./config/keys.js');
+
+cloudinary.config({
+    cloud_name: cloudKeys.cloud_name,
+    api_key: cloudKeys.api_key,
+    api_secret: cloudKeys.api_secret
+});
 
 //passport middleware
 app.use(passport.initialize());

@@ -5,11 +5,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys').secretOrKey;
 const passport = require('passport');
-
+const admin = require('../config/admin');
+const formidable = require('express-formidable');
 //load input validation
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
-
+const cloudinary = require('cloudinary');
 
 router.post('/register', (req, res) => {
         const { errors, isValid } = validateRegisterInput(req.body);
@@ -117,7 +118,18 @@ router.get('/current', passport.authenticate('jwt', {session:false}), (req, res)
     });
 });
 
-
+router.post('/uploadimage', passport.authenticate('jwt', {sessions:false}), formidable(),(req, res) => {
+    cloudinary.uploader.upload(req.files.file.path,(result)=> {
+            console.log(result);
+            res.status(200).send({
+               public_id:result.public_id,
+               url:result.url 
+            })
+    },{
+        public_id: `${Date.now()}`,
+        resource_type:'auto'
+    })
+})
 
 
 module.exports = router;

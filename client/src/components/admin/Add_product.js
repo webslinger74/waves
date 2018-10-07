@@ -130,7 +130,7 @@ class AddProduct extends Component {
             
         }
       
-
+//this gets array of updated images from inside dropzone after axios request completed
     imagesHandler = (images) => {
 
     }
