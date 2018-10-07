@@ -16,7 +16,7 @@ const db = require('./config/keys.js').mongoURI;
 
 //connect to MongoDB
 
-mongoose.connect(db, {server: { auto_reconnect: true } } /*{ useNewUrlParser: true }*/)
+mongoose.connect(db, {server: { auto_reconnect: true, useNewUrlParser: true }})
     .then(()=> console.log('db connected'))
     .catch((error) => console.log(error));
 
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 const cloudKeys = require('./config/keys.js');
-
+console.log(cloudKeys.cloud_name)
 cloudinary.config({
     cloud_name: cloudKeys.cloud_name,
     api_key: cloudKeys.api_key,

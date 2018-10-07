@@ -118,9 +118,10 @@ router.get('/current', passport.authenticate('jwt', {session:false}), (req, res)
     });
 });
 
-router.post('/uploadimage', passport.authenticate('jwt', {sessions:false}), formidable(),(req, res) => {
-    cloudinary.uploader.upload(req.files.file.path,(result)=> {
-            console.log(result);
+router.post('/uploadimage', passport.authenticate('jwt', {session:false}), formidable(), (req, res) => {
+    console.log(req.files.file.path, "request file path")
+    cloudinary.uploader.upload(req.files.file.path,(result) => {
+            console.log(result, "this is something back from cloudinary");
             res.status(200).send({
                public_id:result.public_id,
                url:result.url 
