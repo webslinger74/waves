@@ -126,13 +126,19 @@ class AddProduct extends Component {
                     errors:this.props.errors
                 })
             }
-            
+    
             
         }
       
 //this gets array of updated images from inside dropzone after axios request completed
-    imagesHandler = (images) => {
+    imagesHandler = (allImages) => {
+        console.log(allImages, "the images to be added")
+           this.setState({
+               ...this.state.images,
+               images:allImages
+           })
 
+           console.log(this.state, "the state in add product")
     }
 
     render() { 

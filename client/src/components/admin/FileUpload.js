@@ -39,8 +39,23 @@ class FileUpload extends Component {
             })
     }
 
-    showUploadedImages = ()=> {
+    onRemove = (id) => {
+        console.log("image will be removed in future")
+    }
 
+    showUploadedImages = (files)=> {
+        console.log(files, "this is the files in show uploaded images");
+      const ImgArr =  files.map((file) => ( 
+                <div key={file.public_id} 
+                    className="dropzone_box"
+                    onClick={() => this.onRemove(file.public_id)}>
+                    <div className="wrap"
+                    style={{background:`url(${file.url}) no-repeat`}}>
+                    </div>
+                </div>  
+        ))
+        console.log(ImgArr, "imgarr")
+        return ImgArr;
     }
 
     render() { 
@@ -59,7 +74,7 @@ class FileUpload extends Component {
                             />
                         </div>
                         </Dropzone>
-                        {this.showUploadedImages()}
+                        {this.showUploadedImages(this.state.uploadedFiles)}
                         {
                             this.state.uploading ? 
                                 <div className="dropzone_box" style={{
