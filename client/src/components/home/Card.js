@@ -12,7 +12,7 @@ class Card extends Component {
         console.log(images, "this is the images");
        
         if(images && images.length > 0){
-                return image[0].url
+                return images[0].url
         } else {
             return noImage;
         }  

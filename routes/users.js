@@ -118,7 +118,7 @@ router.get('/current', passport.authenticate('jwt', {session:false}), (req, res)
     });
 });
 
-router.post('/uploadimage', passport.authenticate('jwt', {session:false}), formidable(), (req, res) => {
+router.post('/uploadimage', passport.authenticate('jwt', {session:false}),admin, formidable(), (req, res) => {
     console.log(req.files.file.path, "request file path")
     cloudinary.uploader.upload(req.files.file.path,(result) => {
             console.log(result, "this is something back from cloudinary");
@@ -129,6 +129,16 @@ router.post('/uploadimage', passport.authenticate('jwt', {session:false}), formi
     },{
         public_id: `${Date.now()}`,
         resource_type:'auto'
+    })
+})
+
+router.get('/removeimage', passport.authenticate('jwt', {session:false}), admin, (req,res) => {
+    let image_id = req.query.public_id;
+    cloudinary.uploader.destroy(image_id, (error, result) => {
+        if(error){
+            return res.json({success:false});
+        }
+        res.status(200).send(console.log("successful delete!"));
     })
 })
 

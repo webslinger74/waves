@@ -87,6 +87,7 @@ class AddProduct extends Component {
                     }
                     newState[key] = this.state[key];
           }
+          console.log(newState, "state just before adding product");
         this.props.addProduct(newState);
 
         }
@@ -110,6 +111,7 @@ class AddProduct extends Component {
                     frets:'',
                     publish:'',
                     errors: {},
+                    images:[],
                     formSuccess:true
                 })
                 setTimeout(() => {
@@ -136,10 +138,11 @@ class AddProduct extends Component {
            this.setState({
                ...this.state.images,
                images:allImages
+           },()=> {
+            console.log(this.state, "the state in add product after set state call back!") 
            })
-
-           console.log(this.state, "the state in add product")
     }
+
 
     render() { 
         const {errors} = this.state;
@@ -153,7 +156,7 @@ class AddProduct extends Component {
                 
                 <FileUpload 
                     imagesHandler={(images) => this.imagesHandler(images)}
-
+                    reset={this.state.formSuccess}
                 
                 
                 />

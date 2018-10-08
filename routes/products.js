@@ -75,7 +75,8 @@ router.post('/guitars', passport.authenticate('jwt', {session:false}), admin, (r
                 available:req.body.available,
                 wood:req.body.wood,
                 frets:req.body.frets,
-                publish:req.body.publish
+                publish:req.body.publish,
+                images:req.body.images
             });
             console.log(product, "this is the product")
             product.save()
