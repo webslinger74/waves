@@ -8,6 +8,7 @@ import {
     ADD_PRODUCT,
     GET_ERRORS,
     REMOVE_PRODUCT,
+    ADD_BRAND,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
@@ -55,6 +56,18 @@ export const getBrands = () => (dispatch) => {
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+export const addBrand = (brandName, currentBrands) => (dispatch) => {
+    const bName = brandName.name
+   const request = axios.post('/api/productsBrands/brands', bName)
+        .then(response => {
+            let brands = [
+                ...currentBrands,
+                response.data.brand
+            ]
+            
         })
 }
 

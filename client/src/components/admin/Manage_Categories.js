@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserLayout from '../User/UserLayout';
 import ManageBrands from './Manage_Brands';
 import ManageWoods from './Manage_Woods';

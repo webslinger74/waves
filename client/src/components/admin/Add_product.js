@@ -122,7 +122,7 @@ class AddProduct extends Component {
             }
 
            
-            
+            // here is where the component state errors get updated from redux state errors
             if(prevProps.errors !== this.props.errors && Object.keys(this.props.errors).length > 0){
                 this.setState({
                     errors:this.props.errors
