@@ -9,11 +9,15 @@ import {
     GET_ERRORS,
     REMOVE_PRODUCT,
     ADD_BRAND,
+    GET_PRODUCT_DETAIL,
+    CLEAR_PRODUCT_DETAIL,
+    CLEAR_ERROR,
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER
 } from './types';
+import Product_Detail from '../components/Product/Product_Detail';
 
 export const getProductsByArrival = () => (dispatch) => {
     axios.get('/api/productsGuitars/guitars_by_sortby?sortBy=createdAt&order=desc&limit=4')
@@ -142,9 +146,38 @@ export const addProduct = (brands) => (dispatch) => {
 })
 }
 
+
+export const clearErrors = () => (dispatch) => {
+    dispatch({
+        type:GET_ERRORS,
+        payload:{}
+    })
+}
+
 export const removeProduct = () => (dispatch) => {
     dispatch({
         type:REMOVE_PRODUCT,
         payload: {}
     })
+}
+
+
+export const getProductDetail = (id) => (dispatch) => {
+        axios.get(`/api/productsGuitars/guitars_byId?id=${id}&type=single`)
+        .then((response) => {
+            dispatch({
+                type:GET_PRODUCT_DETAIL,
+                payload:response.data[0]
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const clearProductDetail = () => (dispatch) => {
+        dispatch({
+            type:CLEAR_PRODUCT_DETAIL,
+            payload:{}
+        })
 }

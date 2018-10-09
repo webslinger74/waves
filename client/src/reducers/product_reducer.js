@@ -6,7 +6,9 @@ import {
     GET_PRODUCTS_TO_SHOP,
     ADD_PRODUCT,
     REMOVE_PRODUCT,
-    ADD_BRAND
+    ADD_BRAND,
+    GET_PRODUCT_DETAIL,
+    CLEAR_PRODUCT_DETAIL
  } from '../actions/types';
 
 
@@ -29,6 +31,16 @@ import {
                     ...state,
                     articleSize:action.payload.size,
                     articles: action.payload.articles
+                }
+                case GET_PRODUCT_DETAIL:
+                return {
+                    ...state,
+                    productDetail:action.payload
+                }
+                case CLEAR_PRODUCT_DETAIL:
+                return {
+                    ...state,
+                    productDetail:action.payload
                 }
                 case GET_BRANDS:
                 return {

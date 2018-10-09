@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getBrands, addBrand } from '../../actions/product_actions';
+import { getBrands, addBrand, clearErrors } from '../../actions/product_actions';
 import TextFieldGroup from '../Inputs/TextFieldGroup';
 import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
@@ -36,11 +36,17 @@ class ManageBrands extends Component {
         }   
     }
 
-      
+    
 
     componentDidMount(){
         this.props.getBrands();
+
     }
+    componentWillUnmount(){
+        this.props.clearErrors();
+        
+  }
+
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -103,7 +109,7 @@ class ManageBrands extends Component {
                                  
                                  {this.state.formSuccess === true ? 
                                      (<div className="form_success">
-                                         You have succesfully added your Guitar
+                                         You have succesfully added a New Brand
                                      </div>): null}
      
      
@@ -129,7 +135,8 @@ class ManageBrands extends Component {
 
 const actions = {
     getBrands,
-    addBrand
+    addBrand,
+    clearErrors
 }
 
 const mapStateToProps = (state) => ({

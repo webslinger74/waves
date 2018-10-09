@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserLayout from '../User/UserLayout';
 import {connect} from 'react-redux';
-import {getBrands, getWoods, addProduct, removeProduct} from '../../actions/product_actions';
+import {getBrands, getWoods, addProduct, removeProduct, clearErrors} from '../../actions/product_actions';
 import TextFieldGroup from '../Inputs/TextFieldGroup';
 import TextAreaFieldGroup from '../Inputs/TextAreaFieldGroup';
 import SelectListGroup from '../Inputs/SelectListGroup';
@@ -96,6 +96,10 @@ class AddProduct extends Component {
           componentDidMount(){
               this.props.getBrands();
               this.props.getWoods();
+          }
+
+          componentWillUnmount(){
+            
           }
 
           componentDidUpdate(prevProps) {
@@ -283,7 +287,8 @@ const actions = {
     getBrands,
     getWoods,
     addProduct,
-    removeProduct
+    removeProduct,
+    clearErrors
 }
 
 const mapStateToProps = (state) => ({
