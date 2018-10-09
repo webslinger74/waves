@@ -58,17 +58,34 @@ export const getBrands = () => (dispatch) => {
             console.log(err)
         })
 }
-
+//here
 export const addBrand = (brandName, currentBrands) => (dispatch) => {
-    const bName = brandName.name
-   const request = axios.post('/api/productsBrands/brands', bName)
+        console.log(brandName,"this is the brand prior to axios request")
+             axios.post('/api/productsBrands/brands', brandName)
         .then(response => {
+                //this should get response with success:true, and the brand if posttive
+                console.log(response.data.brand, "is this the brand back!!");
+                console.log(response.data.success, "is this true");
             let brands = [
                 ...currentBrands,
                 response.data.brand
             ]
-            
-        })
+            console.log(brands, "this should be updated array of brands after response from axios")
+            dispatch({
+                type:ADD_BRAND,
+                payload:brands
+            })
+            dispatch({
+                type:GET_ERRORS,
+                payload: {}
+            })
+          })
+          .catch((err) => {
+              dispatch({
+                  type:GET_ERRORS,
+                  payload:err.response.data
+              })
+      })
 }
 
 

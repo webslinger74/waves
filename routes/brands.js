@@ -4,10 +4,21 @@ const Brand = require('../models/Brand');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const admin = require('../config/admin');
+const validateAddBrand = require('../validation/addbrand');
+
 
 router.post('/brands', passport.authenticate('jwt', {session:false}), admin, (req, res) => {
+
+          const { errors, isValid } = validateAddBrand(req.body);
+             console.log(req.body, "this is the info to be validated")
+             if (!isValid) {
+                  console.log(errors)
+                     return res.status(400).json(errors);
+       
+                 }
+
             const brand = new Brand({
-                name:req.body.name
+                name:req.body.brand
             });
 
             brand.save()

@@ -5,7 +5,8 @@ import {
     GET_WOODS,
     GET_PRODUCTS_TO_SHOP,
     ADD_PRODUCT,
-    REMOVE_PRODUCT
+    REMOVE_PRODUCT,
+    ADD_BRAND
  } from '../actions/types';
 
 
@@ -34,6 +35,11 @@ import {
                     ...state,
                     brands:action.payload
                 } 
+                case ADD_BRAND:
+                return {
+                    ...state,
+                    brands:action.payload
+                }
                 case GET_WOODS:
                 return {
                     ...state,

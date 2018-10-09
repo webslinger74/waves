@@ -85,9 +85,6 @@ class ManageBrands extends Component {
                         {this.showCategoryItems()}
                     </div>
 
-
-
-
                 </div>
                 <div className="right">
                 
@@ -96,9 +93,9 @@ class ManageBrands extends Component {
                       <TextFieldGroup 
                                  type="text"
                                  placeholder="Product Name"
-                                 name="name"
+                                 name="brand"
                                  error={errors.name}
-                                 value={this.state.name}
+                                 value={this.state.brand}
                                  onChange={this.onChange}
                             />
 
