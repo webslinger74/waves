@@ -17,7 +17,20 @@ import {
     AUTH_USER,
     LOGOUT_USER
 } from './types';
-import Product_Detail from '../components/Product/Product_Detail';
+
+
+export const getIndProd = (id) => (dispatch) => {
+        axios.get(`/api/productsGuitars/guitars_byId?id=${id}&type=single`)
+        .then((response) => {
+            dispatch({
+                type: GET_PRODUCT_DETAIL,
+                payload: response.data[0]
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
 export const getProductsByArrival = () => (dispatch) => {
     axios.get('/api/productsGuitars/guitars_by_sortby?sortBy=createdAt&order=desc&limit=4')
@@ -162,18 +175,7 @@ export const removeProduct = () => (dispatch) => {
 }
 
 
-export const getProductDetail = (id) => (dispatch) => {
-        axios.get(`/api/productsGuitars/guitars_byId?id=${id}&type=single`)
-        .then((response) => {
-            dispatch({
-                type:GET_PRODUCT_DETAIL,
-                payload:response.data[0]
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-}
+
 
 export const clearProductDetail = () => (dispatch) => {
         dispatch({

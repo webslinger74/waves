@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import noImage from '../../images/image_not_availble.png';
-
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
     constructor(props) {
@@ -36,6 +36,7 @@ class Card extends Component {
                 <div className="brand">{card.brand.name}</div>
                 <div className="name">{card.name}</div>
                 <div className="price">{card.price}</div>
+                <div className="cart"><Link to={`/product_detail/${card._id}`}>ADD TO CART</Link></div>
                         </div>            
                                         
                </div>

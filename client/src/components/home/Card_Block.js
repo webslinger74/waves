@@ -10,7 +10,7 @@ const  CardBlock = ({ item , title}) => {
 
                 <div className="card_item_wrapper" key={i}>
 
-                        <Card card={card} key={i} />
+                        <Card card={card} key={card._id} />
                   
                 </div>
             )) : null

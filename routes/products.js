@@ -19,7 +19,7 @@ router.get('/guitars_by_sortby', (req,res) => {
 
     Product.find()
         .populate('brand')
-        .populate('woods')
+        .populate('wood')
         .sort([[sortBy, order]])
         .limit(limit)
         .exec((err, guitars) => {
@@ -43,7 +43,7 @@ router.get('/guitars_byId', (req, res) => {
 
     Product.find({'_id':{$in:items}})
     .populate('brand')
-    .populate('woods')
+    .populate('wood')
         .exec((err,docs) => {
             return res.status(200).send(docs);
             if(err){

@@ -1,48 +1,83 @@
 import React, { Component } from 'react';
+import { getIndProd, clearProductDetail } from '../../actions/product_actions';
 import PageTop from '../../utils/PageTop';
 import { connect } from 'react-redux';
-import { getProductDetail, clearProductDetail } from '../../actions/product_actions';
+import ProductInfo from './ProductInfo';
+
 
 class ProductDetail extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-
+   
+       
     componentDidMount(){
         const id =  this.props.match.params.id;
-        this.props.getProductDetail(id);
-        console.log(id);
-
+        this.props.getIndProd(id);
     }
 
     componentWillUnmount(){
         this.props.clearProductDetail();
     }
 
-
+      
     render() { 
+
         return (
 
             <div>
                 <PageTop 
                 title="Product Detail"
                 />
+            <div className="container">
+            
+            
+            {
+                this.props.productDetail  && Object.keys(this.props.productDetail).length > 0 ?
+                    <div className="product_detail_wrapper">
+                        <div className="left">
+                        images
+                        </div>
+                        <div className="right">
+                        <ProductInfo 
+                        detail={this.props.productDetail}
+                        addToCart={(id)=> this.addToCartHandler(id)}
+                        
+                        
+                        />
+                        </div>
+                    
+                    
+                    </div>
+
+                :"loading"
+            }
+            
+            </div>
+
+
+
+
+
 
             </div>
 
 
           );
     }
+
+
+
+
+
+    
 }
 
 const actions = {
-    getProductDetail,
+    getIndProd,
     clearProductDetail
 }
 
 const mapStateToProps = (state) => ({
-    products: state.products
+    products: state.products,
+    productDetail:state.products.productDetail
 })
  
 export default connect(mapStateToProps, actions)(ProductDetail);
