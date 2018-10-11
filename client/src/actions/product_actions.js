@@ -183,3 +183,29 @@ export const clearProductDetail = () => (dispatch) => {
             payload:{}
         })
 }
+
+
+///////////////////////////////////just for testing purposes with Jest
+
+export const brandy = () => ({
+    type:BRANDY_TEST,
+    payload:{}
+})
+
+const BRANDY_TEST = "brandyYeah";
+
+
+
+export const brandy2 = (id) => {
+    return new Promise((resolve, reject) => {
+            if(id === 1){
+                resolve({sucess:true});
+            } else {
+                reject("error");
+            }
+    })
+}
+
+
+
+////////////////////////////////////////////////////////////////

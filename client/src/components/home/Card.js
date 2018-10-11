@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import noImage from '../../images/image_not_availble.png';
 import { Link } from 'react-router-dom';
+import MyButton from '../Inputs/Button';
 
 class Card extends Component {
     constructor(props) {
@@ -26,17 +27,25 @@ class Card extends Component {
                
 
             <div> 
+                <Link to={`/product_detail/${card._id}`}>
                 <div className="image"
+                                
                                 style={{
                                     background:`url(${this.renderCardImage(card.images)}) no-repeat`
-                                }}> </div>
+                                }}
+                                > </div></Link>
 
                                 <div className="action_container">
                     <div className="tags">
                 <div className="brand">{card.brand.name}</div>
                 <div className="name">{card.name}</div>
                 <div className="price">{card.price}</div>
-                <div className="cart"><Link to={`/product_detail/${card._id}`}>ADD TO CART</Link></div>
+                <div className="cart"> <MyButton 
+                    type="add_to_cart_link"
+                    runAction={() => {
+                        console.log("add to cart for later");
+                    }}
+                    /></div>
                         </div>            
                                         
                </div>
