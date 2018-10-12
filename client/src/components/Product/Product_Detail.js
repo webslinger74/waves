@@ -3,7 +3,7 @@ import { getIndProd, clearProductDetail } from '../../actions/product_actions';
 import PageTop from '../../utils/PageTop';
 import { connect } from 'react-redux';
 import ProductInfo from './ProductInfo';
-
+import ProductImg from './ProductImg';
 
 class ProductDetail extends Component {
    
@@ -33,7 +33,12 @@ class ProductDetail extends Component {
                 this.props.productDetail  && Object.keys(this.props.productDetail).length > 0 ?
                     <div className="product_detail_wrapper">
                         <div className="left">
-                        images
+
+                        <div style={{width:'500px'}}>
+                            <ProductImg
+                                detail={this.props.productDetail}
+                            />
+                        </div>
                         </div>
                         <div className="right">
                         <ProductInfo 
