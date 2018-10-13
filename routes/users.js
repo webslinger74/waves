@@ -7,6 +7,7 @@ const keys = require('../config/keys').secretOrKey;
 const passport = require('passport');
 const admin = require('../config/admin');
 const formidable = require('express-formidable');
+const mongoose = require('mongoose');
 //load input validation
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
@@ -140,6 +141,39 @@ router.get('/removeimage', passport.authenticate('jwt', {session:false}), admin,
         }
         res.status(200).send(console.log("successful delete!"));
     })
+})
+
+router.post('/addToCart', passport.authenticate('jwt', {session:false}), (req,res) => {
+
+    console.log("what the fuck", req.user._id)
+      User.findOne({_id:req.user._id}, (err,doc) => {
+          let duplicate = false;
+
+          doc.cart.forEach((item) => {
+              if(item.id === req.query.productId){
+                    duplicate = true;
+
+              }
+          })
+
+          if(duplicate){
+
+          } else {
+              User.findOneAndUpdate(
+                  {_id: req.user._id},
+                  {$push:{cart:{
+                      id: mongoose.Types.ObjectId(req.query.productId),
+                      quantity:1,
+                      date:Date.now()
+                  }}},
+                  {new:true},
+                  (err,doc)=>{
+                      if(err) return res.json({success:false, err})
+                      res.status(200).json(doc.cart)
+                  }
+              )
+          }
+      } )  
 })
 
 

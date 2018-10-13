@@ -1,6 +1,11 @@
 // Register User
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER , USER_DETAILS, CLEAR_USER_DETAILS} from './types';
+import { GET_ERRORS,
+         SET_CURRENT_USER,
+         USER_DETAILS,
+         CLEAR_USER_DETAILS,
+         ADD_TO_CART_USER
+        } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
@@ -91,5 +96,17 @@ export const logoutUser = (history) => (dispatch) => {
         history.push('/');
 
 
+}
+
+export const addToCart = (id) => (dispatch) => {
+
+     axios.post(`/api/users/addToCart?productId=${id}`)
+        .then(response => 
+             dispatch({
+                  type:ADD_TO_CART_USER,
+                   payload:response.data
+                      })
+              )
+                .catch(err => console.log(err));
 }
 

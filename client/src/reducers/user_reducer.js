@@ -1,4 +1,9 @@
-import {SET_CURRENT_USER, USER_DETAILS, CLEAR_USER_DETAILS } from '../actions/types';
+import { SET_CURRENT_USER,
+         USER_DETAILS,
+         CLEAR_USER_DETAILS,
+         ADD_TO_CART_USER
+        } from '../actions/types';
+
 import isEmpty from '../../../validation/is-Empty';
 
 
@@ -27,6 +32,15 @@ const userReducer = (state=initialState, action)=> {
         return {
             ...state,
             FullUserRecord:action.payload
+        }
+        case ADD_TO_CART_USER:
+        return {
+            ...state,
+            FullUserRecord:{
+                ...state.FullUserRecord,
+                cart:action.payload
+            }
+
         }
         default:
             return state;

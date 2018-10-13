@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import noImage from '../../images/image_not_availble.png';
 import { Link } from 'react-router-dom';
 import MyButton from '../Inputs/Button';
+import { connect } from 'react-redux';
+import { addToCart } from '../../actions/user_actions';
 
 class Card extends Component {
     constructor(props) {
@@ -43,7 +45,9 @@ class Card extends Component {
                 <div className="cart"> <MyButton 
                     type="add_to_cart_link"
                     runAction={() => {
-                        console.log("add to cart for later");
+                        this.props.user.FullUserRecord && this.props.user.FullUserRecord.isAuth ?
+                        this.props.addToCart(card._id)
+                        : console.log("login please")
                     }}
                     /></div>
                         </div>            
@@ -55,5 +59,13 @@ class Card extends Component {
           );
     }
 }
+
+const actions = {
+    addToCart
+}
+
+const mapStateToProps = (state) => ({
+    user:state.auth
+})
  
-export default Card;
+export default connect(mapStateToProps, actions)(Card);
